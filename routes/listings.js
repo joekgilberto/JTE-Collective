@@ -1,13 +1,12 @@
 var express = require('express');
 var router = express.Router();
+const listingsCtrl = require('../controllers/listings')
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('Welcome to the index page');
-});
+router.get('/', listingsCtrl.index)
 
-router.get('/new', function(req, res, next) {
-  res.send('Welcome to the new page');
-});
+router.get('/new', listingsCtrl.new)
+
+router.post("/", listingsCtrl.create);
 
 module.exports = router;
