@@ -8,8 +8,19 @@
     </div>
   </header>
   <section class="categories">
-    <div class="category">Category 1</div>
-    <div class="category">Category 2</div>
+    <% for (let list of listings){ %>
+      <p><%= list.title%></p>
+      <p>$<%= list.price%></p>
+      <!-- TOOD: remove description -->
+      <p><%= list.description%></p>
+      <p><%= list.listingDate %></p>
+      <% if(list.sold === false){ %>
+      <p>For Sale</p>
+      <% } else if(list.sold === true) { %>
+      <p>Sold</p>
+      <%}%>
+    <% }%>
+    <div class="category"></div>
   </section>
 
   <%- include('./partials/footer.ejs') %>

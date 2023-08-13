@@ -8,7 +8,9 @@ module.exports = {
 }
 
 async function index(req,res,next){
-    res.render('index', { title: 'All Listings' });
+    const listings = await Listing.find({})
+    console.log(listings)
+    res.render('index', { title: 'All Listings', listings });
 }
 
 async function newListing(req,res,next){
