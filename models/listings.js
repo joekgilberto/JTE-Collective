@@ -6,11 +6,11 @@ const listingSchema = new Schema({
     title: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
-    image: {
-        type: Buffer,
-        contentType: String
-        //TODO: default
-    },
+    // image: {
+    //     type: Buffer,
+    //     contentType: String
+    //     //TODO: default
+    // },
     listingDate: {
         type: Date,
         default: new Date()
