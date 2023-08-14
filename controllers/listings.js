@@ -1,6 +1,7 @@
 // const { default: mongoose } = require('mongoose')
 const Listing = require('../models/listings')
 const Auction = require('../models/auctions')
+const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
     index,
@@ -42,19 +43,19 @@ async function create(req, res, next) {
 async function show(req, res, next) {
     const id = req.params.id
     const showListing = await Listing.findById(id)
-    let auctions = []
-    for (let a of showListing.auctions){
-        a.accepted = false;
-        await Auction.findById(a).then(function(found){
-            auctions.push(found)
+    let auctions = await Auction.find({listing: new ObjectId(id)})
+    
+    if (auctions.length > 0) {
+        auctions.forEach(a=>{
+            a.accepted = false
         })
+
+        auctions.sort((a, b) => {
+            return b.offer - a.offer
+        })
+
+        auctions[0].accepted = true
     }
-
-    auctions.sort((a,b)=>{
-        return b.offer - a.offer
-    })
-
-    auctions[0].accepted = true
 
     res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
 }
