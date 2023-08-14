@@ -24,4 +24,11 @@
     <button type=""submit>Delete</button>
    </form>
 
+   <form action="/listings/<%=listing._id%>/auction/new" method="POST">
+    <label>Offer: $
+        <input type="number" min="0" name="offer">
+    </label>
+    <button type="submit">Place Bid</button>
+   </form>
+
   <%- include('../partials/footer.ejs') %>
