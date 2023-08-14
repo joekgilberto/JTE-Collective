@@ -7,13 +7,19 @@
       <a href="/listings/new"><button class="button">New Listing</button></a>
     </div>
   </header>
-  <section class="categories">
+  <section class="listings">
     <% for (let list of listings){ %>
-      <p><%= list.title%></p>
-      <p>$<%= list.price%></p>
-      <p>Posted: <%= list.listingDate.toLocaleString() %></p>
-      <p><a href="/listings/<%=list._id%>">More Info</a></p>
-    <% }%>
+      <section class="list">
+        <p>
+          <%= list.title%>
+        </p>
+        <p>$<%= list.price%>
+        </p>
+        <p>Posted: <%= list.listingDate.toLocaleString() %>
+        </p>
+        <p><a href="/listings/<%=list._id%>">More Info</a></p>
+      </section>
+      <% }%>
   </section>
 
   <%- include('./partials/footer.ejs') %>
