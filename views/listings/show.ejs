@@ -1,12 +1,4 @@
 <%- include('../partials/header.ejs') %>
-
-    <header class="header"> <!-- TODO: put in header partial -->
-        <h1>JTE Collective</h1>
-        <div class="nav-buttons">
-            <a href="/listings"><button class="button">Browse</button></a>
-            <a href="/listings/new"><button class="button">New Listing</button></a>
-        </div>
-    </header>
     <section class="categories">
         <h1>
             <%= listing.title%>
@@ -44,12 +36,14 @@
                 </form>
                 <% }) %>
                     <% } %>
+                    <% if (user) { %>
                         <form action="/listings/<%=listing._id%>/auction/new" method="POST">
                             <label>Offer: $
                                 <input type="number" min="0" step="0.01" name="offer" required>
                             </label>
                             <button type="submit">Place Bid</button>
                         </form>
+                    <% } %>
     </section>
 
     <%- include('../partials/footer.ejs') %>

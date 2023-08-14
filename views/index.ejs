@@ -1,12 +1,6 @@
 <%- include('./partials/header.ejs') %>
 
-  <header class="header"> <!-- TODO: put in header partial -->
-    <h1>JTE Collective</h1>
-    <div class="nav-buttons">
-      <a href="/listings"><button class="button">Browse</button></a>
-      <a href="/listings/new"><button class="button">New Listing</button></a>
-    </div>
-  </header>
+
   <section class="listings">
     <% for (let list of listings){ %>
       <section class="list">
