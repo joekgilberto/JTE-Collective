@@ -12,13 +12,12 @@
       <p>$<%= listing.price%></p>
       <!-- TOOD: remove description -->
       <p><%= listing.description%></p>
-      <p><%= listing.listingDate.toLocaleString() %></p>
+      <p>Posted: <%= listing.listingDate.toLocaleString() %></p>
       <% if(listing.sold === false){ %>
       <p>For Sale</p>
       <% } else if(listing.sold === true) { %>
       <p>Sold</p>
       <%}%>
-    <div class="category"></div>
   </section>
 
   <%- include('../partials/footer.ejs') %>

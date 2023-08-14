@@ -11,17 +11,9 @@
     <% for (let list of listings){ %>
       <p><%= list.title%></p>
       <p>$<%= list.price%></p>
-      <!-- TOOD: remove description -->
-      <p><%= list.description%></p>
-      <p><%= list.listingDate %></p>
-      <% if(list.sold === false){ %>
-      <p>For Sale</p>
-      <% } else if(list.sold === true) { %>
-      <p>Sold</p>
-      <%}%>
+      <p>Posted: <%= list.listingDate.toLocaleString() %></p>
       <p><a href="/listings/<%=list._id%>">More Info</a></p>
     <% }%>
-    <div class="category"></div>
   </section>
 
   <%- include('./partials/footer.ejs') %>
