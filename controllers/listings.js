@@ -43,12 +43,19 @@ async function show(req, res, next) {
     const id = req.params.id
     const showListing = await Listing.findById(id)
     let auctions = []
-    for (let auction of showListing.auctions){
-        await Auction.findById(auction).then(function(found){
+    for (let a of showListing.auctions){
+        a.accepted = false;
+        await Auction.findById(a).then(function(found){
             auctions.push(found)
         })
     }
-    console.log(auctions)
+
+    auctions.sort((a,b)=>{
+        return b.offer - a.offer
+    })
+
+    auctions[0].accepted = true
+
     res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
 }
 
