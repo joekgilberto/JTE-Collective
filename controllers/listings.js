@@ -1,5 +1,6 @@
 // const { default: mongoose } = require('mongoose')
 const Listing = require('../models/listings')
+const Auction = require('../models/auctions')
 
 module.exports = {
     index,
@@ -41,6 +42,7 @@ async function create(req, res, next) {
 async function show(req, res, next) {
     const id = req.params.id
     const showListing = await Listing.findById(id)
+    // const auctions = await Auctions
     console.log(showListing.auctions)
     res.render('listings/show', { title: showListing.title, listing: showListing })
 }
