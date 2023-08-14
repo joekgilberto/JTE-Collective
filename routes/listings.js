@@ -7,6 +7,8 @@ router.get('/', listingsCtrl.index)
 
 router.get('/new', listingsCtrl.new)
 
+router.get('/:id', listingsCtrl.show)
+
 router.post("/", listingsCtrl.create);
 
 module.exports = router;

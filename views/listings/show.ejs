@@ -1,4 +1,4 @@
-<%- include('./partials/header.ejs') %>
+<%- include('../partials/header.ejs') %>
 
   <header class="header"> <!-- TODO: put in header partial -->
     <h1>JTE Collective</h1>
@@ -8,20 +8,17 @@
     </div>
   </header>
   <section class="categories">
-    <% for (let list of listings){ %>
-      <p><%= list.title%></p>
-      <p>$<%= list.price%></p>
+      <p><%= listing.title%></p>
+      <p>$<%= listing.price%></p>
       <!-- TOOD: remove description -->
-      <p><%= list.description%></p>
-      <p><%= list.listingDate %></p>
-      <% if(list.sold === false){ %>
+      <p><%= listing.description%></p>
+      <p><%= listing.listingDate.toLocaleString() %></p>
+      <% if(listing.sold === false){ %>
       <p>For Sale</p>
-      <% } else if(list.sold === true) { %>
+      <% } else if(listing.sold === true) { %>
       <p>Sold</p>
       <%}%>
-      <p><a href="/listings/<%=list._id%>">More Info</a></p>
-    <% }%>
     <div class="category"></div>
   </section>
 
-  <%- include('./partials/footer.ejs') %>
+  <%- include('../partials/footer.ejs') %>

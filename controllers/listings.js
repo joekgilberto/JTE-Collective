@@ -4,7 +4,8 @@ const Listing = require('../models/listings')
 module.exports = {
     index,
     new: newListing,
-    create
+    create,
+    show
 }
 
 async function index(req,res,next){
@@ -32,4 +33,11 @@ async function create(req,res,next){
         console.log(err);
         res.render('listings/new', { title: 'New Listing', errorMsg: err.message });
       }
+}
+
+async function show(req,res,next){
+    const id = req.params.id
+    const showListing = await Listing.findById(id)
+    console.log(showListing)
+    res.render('listings/show', {title: showListing.title, listing: showListing})
 }
