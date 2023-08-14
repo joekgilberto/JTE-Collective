@@ -8,9 +8,9 @@
         </div>
     </header>
     <section class="categories">
-        <p>
+        <h1>
             <%= listing.title%>
-        </p>
+        </h1>
         <p>$<%= listing.price%>
         </p>
         <!-- TOOD: remove description -->
@@ -24,24 +24,29 @@
             <% } else if(listing.sold===true) { %>
                 <p>Sold</p>
                 <%}%>
+
+
+        <a href="/listings/<%=listing._id%>/edit"><button>Edit</button></a>
+        <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+            <button type="" submit>Delete</button>
+        </form>
     </section>
-    <a href="/listings/<%=listing._id%>/edit"><button>Edit</button></a>
-    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-        <button type="" submit>Delete</button>
-    </form>
 
     <section class="bids">
-        <% if (auctions.length > 0){ %>
+        <h2>Bids</h2>
+        <% if (auctions.length> 0){ %>
             <% auctions.forEach((a)=>{ %>
-                <p><%=a.offer%></p>
-            <% }) %>
-        <% } %>
-        <form action="/listings/<%=listing._id%>/auction/new" method="POST">
-            <label>Offer: $
-                <input type="number" min="0" name="offer" required>
-            </label>
-            <button type="submit">Place Bid</button>
-        </form>
+                <p>
+                    <%=a.offer%> <% if (a.accepted){ %>Accepted<% } else { %>Pending<% } %>
+                </p>
+                <% }) %>
+                    <% } %>
+                        <form action="/listings/<%=listing._id%>/auction/new" method="POST">
+                            <label>Offer: $
+                                <input type="number" min="0" name="offer" required>
+                            </label>
+                            <button type="submit">Place Bid</button>
+                        </form>
     </section>
 
     <%- include('../partials/footer.ejs') %>
