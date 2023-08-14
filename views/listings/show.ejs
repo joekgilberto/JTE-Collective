@@ -1,34 +1,47 @@
 <%- include('../partials/header.ejs') %>
 
-  <header class="header"> <!-- TODO: put in header partial -->
-    <h1>JTE Collective</h1>
-    <div class="nav-buttons">
-      <a href="/listings"><button class="button">Browse</button></a>
-      <a href="/listings/new"><button class="button">New Listing</button></a>
-    </div>
-  </header>
-  <section class="categories">
-      <p><%= listing.title%></p>
-      <p>$<%= listing.price%></p>
-      <!-- TOOD: remove description -->
-      <p><%= listing.description%></p>
-      <p>Posted: <%= listing.listingDate.toLocaleString() %></p>
-      <% if(listing.sold === false){ %>
-      <p>For Sale</p>
-      <% } else if(listing.sold === true) { %>
-      <p>Sold</p>
-      <%}%>
-  </section>
-   <a href="/listings/<%=listing._id%>/edit"><button>Edit</button></a>
-   <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-    <button type=""submit>Delete</button>
-   </form>
+    <header class="header"> <!-- TODO: put in header partial -->
+        <h1>JTE Collective</h1>
+        <div class="nav-buttons">
+            <a href="/listings"><button class="button">Browse</button></a>
+            <a href="/listings/new"><button class="button">New Listing</button></a>
+        </div>
+    </header>
+    <section class="categories">
+        <p>
+            <%= listing.title%>
+        </p>
+        <p>$<%= listing.price%>
+        </p>
+        <!-- TOOD: remove description -->
+        <p>
+            <%= listing.description%>
+        </p>
+        <p>Posted: <%= listing.listingDate.toLocaleString() %>
+        </p>
+        <% if(listing.sold===false){ %>
+            <p>For Sale</p>
+            <% } else if(listing.sold===true) { %>
+                <p>Sold</p>
+                <%}%>
+    </section>
+    <a href="/listings/<%=listing._id%>/edit"><button>Edit</button></a>
+    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+        <button type="" submit>Delete</button>
+    </form>
 
-   <form action="/listings/<%=listing._id%>/auction/new" method="POST">
-    <label>Offer: $
-        <input type="number" min="0" name="offer">
-    </label>
-    <button type="submit">Place Bid</button>
-   </form>
+    <section class="bids">
+        <% if (listing.auctions.length > 0){ %>
+            <% listing.auctions.forEach((a)=>{ %>
+                <p><%=a.offer%></p>
+            <% }) %>
+        <% } %>
+        <form action="/listings/<%=listing._id%>/auction/new" method="POST">
+            <label>Offer: $
+                <input type="number" min="0" name="offer" required>
+            </label>
+            <button type="submit">Place Bid</button>
+        </form>
+    </section>
 
-  <%- include('../partials/footer.ejs') %>
+    <%- include('../partials/footer.ejs') %>

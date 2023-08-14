@@ -3,3 +3,5 @@ var router = express.Router();
 const auctionsCtrl = require('../controllers/auctions')
 
 router.post('/listings/:id/auction/new', auctionsCtrl.create)
+
+module.exports = router;

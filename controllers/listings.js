@@ -41,6 +41,7 @@ async function create(req, res, next) {
 async function show(req, res, next) {
     const id = req.params.id
     const showListing = await Listing.findById(id)
+    console.log(showListing.auctions)
     res.render('listings/show', { title: showListing.title, listing: showListing })
 }
 
