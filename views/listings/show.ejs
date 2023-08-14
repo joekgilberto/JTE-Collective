@@ -31,8 +31,8 @@
     </form>
 
     <section class="bids">
-        <% if (listing.auctions.length > 0){ %>
-            <% listing.auctions.forEach((a)=>{ %>
+        <% if (auctions.length > 0){ %>
+            <% auctions.forEach((a)=>{ %>
                 <p><%=a.offer%></p>
             <% }) %>
         <% } %>
