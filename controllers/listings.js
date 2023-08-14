@@ -42,9 +42,14 @@ async function create(req, res, next) {
 async function show(req, res, next) {
     const id = req.params.id
     const showListing = await Listing.findById(id)
-    // const auctions = await Auctions
-    console.log(showListing.auctions)
-    res.render('listings/show', { title: showListing.title, listing: showListing })
+    let auctions = []
+    for (let auction of showListing.auctions){
+        await Auction.findById(auction).then(function(found){
+            auctions.push(found)
+        })
+    }
+    console.log(auctions)
+    res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
 }
 
 async function edit(req, res, next) {
