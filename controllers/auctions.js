@@ -24,14 +24,6 @@ async function create(req,res,next){
 async function deleteAuction(req,res,next){
     const listingId = req.params.listingId;
     const auctionId = req.params.auctionId;
-
-    await Listing.findById(listingId).then(function(foundListing){
-        const idx = foundListing.auctions.findIndex((a)=>{
-           return a._id === auctionId
-        })
-        foundListing.auctions.splice(idx,1)
-    })
-
     await Auction.deleteOne({ _id: auctionId }).then(function () {
         res.redirect(`/listings/${listingId}`)
     })
