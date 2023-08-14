@@ -18,7 +18,11 @@ const listingSchema = new Schema({
     sold: {
         type: Boolean,
         default: false
-    }
+    },
+    auctions: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Auction'
+    }]
 })
 
 module.exports = mongoose.model('Listing', listingSchema)

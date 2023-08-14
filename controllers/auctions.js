@@ -1,4 +1,5 @@
 const Auction = require('../models/auctions')
+const Listing = require('../models/listings')
 
 module.exports = {
     create,
@@ -10,8 +11,11 @@ async function create(req,res,next){
     const auctionData = {...req.body}
     try {
         const createdAuction = await Auction.create(auctionData);
-        // TODO: redirect to listings/:id
-        console.log(auctionData)
+        console.log(createdAuction)
+        const foundListing = await Listing.findById(id)
+        foundListing.auctions.push(createdAuction._id)
+        await foundListing.save()
+
         res.redirect(`/listings/${id}`);
     } catch (err) {
         next(err);
