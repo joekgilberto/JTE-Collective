@@ -15,4 +15,6 @@ router.post('/', listingsCtrl.create);
 
 router.put('/:id', listingsCtrl.update)
 
+router.delete('/:id', listingsCtrl.delete)
+
 module.exports = router;
