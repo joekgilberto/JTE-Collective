@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs') %>
+
+  <header class="header"> <!-- TODO: put in header partial -->
+    <h1>JTE Collective</h1>
+    <div class="nav-buttons">
+      <a href="/listings"><button class="button">Browse</button></a>
+      <a href="/listings/new"><button class="button">New Listing</button></a>
+    </div>
+  </header>
+  <section class="categories">
+      <p><%= listing.title%></p>
+      <p>$<%= listing.price%></p>
+      <!-- TOOD: remove description -->
+      <p><%= listing.description%></p>
+      <p>Posted: <%= listing.listingDate.toLocaleString() %></p>
+      <% if(listing.sold === false){ %>
+      <p>For Sale</p>
+      <% } else if(listing.sold === true) { %>
+      <p>Sold</p>
+      <%}%>
+  </section>
+   <a href="/listings/<%=listing._id%>/edit"><button>Edit</button></a>
+   <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+    <button type=""submit>Delete</button>
+   </form>
+
+  <%- include('../partials/footer.ejs') %>

@@ -7,6 +7,14 @@ router.get('/', listingsCtrl.index)
 
 router.get('/new', listingsCtrl.new)
 
-router.post("/", listingsCtrl.create);
+router.get('/:id', listingsCtrl.show)
+
+router.get('/:id/edit', listingsCtrl.edit)
+
+router.post('/', listingsCtrl.create);
+
+router.put('/:id', listingsCtrl.update)
+
+router.delete('/:id', listingsCtrl.delete)
 
 module.exports = router;
