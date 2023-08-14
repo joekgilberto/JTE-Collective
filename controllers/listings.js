@@ -5,7 +5,9 @@ module.exports = {
     index,
     new: newListing,
     create,
-    show
+    show,
+    edit,
+    update
 }
 
 async function index(req,res,next){
@@ -38,6 +40,33 @@ async function create(req,res,next){
 async function show(req,res,next){
     const id = req.params.id
     const showListing = await Listing.findById(id)
-    console.log(showListing)
     res.render('listings/show', {title: showListing.title, listing: showListing})
+}
+
+async function edit(req,res,next){
+    const id = req.params.id;
+    const results = await Listing.findById(id)
+    res.render('listings/edit', {title: `Edit Listing`, listing: results, id, errorMsg:''})
+}
+
+async function update(req,res,next){
+    const id = req.params.id
+    const updatedData = req.body
+
+    if (updatedData.sold === 'on'){
+        updatedData.sold = true
+    } else {
+        updatedData.sold = false
+    }
+
+    try {
+		const updatedListing = await Listing.findByIdAndUpdate(
+			id,
+			updatedData,
+			{new: true}
+			)
+		res.redirect(`/listings/${id}`)
+	} catch(err) {
+        next(err)
+	}
 }
