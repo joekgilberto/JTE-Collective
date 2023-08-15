@@ -1,26 +1,36 @@
 <%- include('../partials/header.ejs') %>
-  <section class="new-listing-form">
+  <section class="new-listing">
+    <h1>
+      <%=title%>
+    </h1>
+
     <form action="/listings" method="POST">
+      <div class="new-inputs">
+        <div class="new-title-price">
+          <label>Title:
+            <input type="text" name="title" required>
+          </label><br>
 
-        <label>Title:
-          <input type="text" name="title" required>
-        </label><br>
-      
-        <label>Description:
-          <input type="text" name="description" required>
-        </label><br>
-
-        <label>Price:
+          <label>Price: $
             <input type="number" name="price" min="0" required>
+          </label><br>
+        </div>
+        <label class="new-description">Description:<br />
+          <input type="text" name="description" required>
         </label><br>
 
         <!-- <label>Image:
             <input type="file" id="image" name="image" value=""/>
         </label> -->
+      </div>
+      <div class="new-submit">
         <button type="submit">Add Listing</button>
-      
-      </form>
-      <p><%= errorMsg %></p>
+      </div>
+
+    </form>
+    <p>
+      <%= errorMsg %>
+    </p>
   </section>
 
   <%- include('../partials/footer.ejs') %>

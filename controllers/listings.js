@@ -43,7 +43,7 @@ async function show(req, res, next) {
     try {
 
         const showListing = await Listing.findById(id)
-        let auctions = await Auction.find({ listing: new ObjectId(id) })
+        const auctions = await Auction.find({ listing: new ObjectId(id) })
 
         if (auctions.length > 0) {
             auctions.forEach(a => {
