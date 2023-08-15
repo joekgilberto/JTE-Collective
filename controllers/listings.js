@@ -15,7 +15,6 @@ module.exports = {
 
 async function index(req, res, next) {
     const listings = await Listing.find({})
-    console.log(listings)
     res.render('index', { title: 'All Listings', listings });
 }
 
@@ -32,7 +31,6 @@ async function create(req, res, next) {
     try {
         const createdListing = await Listing.create(listingData);
         // TODO: redirect to listings/:id
-        console.log(createdListing)
         res.redirect('/listings');
     } catch (err) {
         console.log(err);
@@ -42,22 +40,27 @@ async function create(req, res, next) {
 
 async function show(req, res, next) {
     const id = req.params.id
-    const showListing = await Listing.findById(id)
-    let auctions = await Auction.find({listing: new ObjectId(id)})
-    
-    if (auctions.length > 0) {
-        auctions.forEach(a=>{
-            a.accepted = false
-        })
+    try {
 
-        auctions.sort((a, b) => {
-            return b.offer - a.offer
-        })
+        const showListing = await Listing.findById(id)
+        let auctions = await Auction.find({ listing: new ObjectId(id) })
 
-        auctions[0].accepted = true
+        if (auctions.length > 0) {
+            auctions.forEach(a => {
+                a.accepted = false
+            })
+
+            auctions.sort((a, b) => {
+                return b.offer - a.offer
+            })
+
+            auctions[0].accepted = true
+        }
+
+        res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
+    } catch (err) {
+        next(err)
     }
-
-    res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
 }
 
 async function edit(req, res, next) {
@@ -95,6 +98,6 @@ async function deleteListing(req, res, next) {
         res.redirect(`/listings`)
     })
         .catch(function (err) {
-            console.log(err)
+            next(err)
         })
 }

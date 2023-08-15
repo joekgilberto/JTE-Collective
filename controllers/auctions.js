@@ -14,7 +14,6 @@ async function create(req,res,next){
     auctionData.listing = foundListing
     try {
         const createdAuction = await Auction.create(auctionData);
-        console.log(createdAuction)
         res.redirect(`/listings/${id}`);
     } catch (err) {
         next(err);
@@ -28,6 +27,6 @@ async function deleteAuction(req,res,next){
         res.redirect(`/listings/${listingId}`)
     })
         .catch(function (err) {
-            console.log(err)
+            next(err)
         })
 }
