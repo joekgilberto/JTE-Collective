@@ -29,6 +29,10 @@ async function create(req, res, next) {
     //TODO: deal with absence of image
     listingData.listingDate = new Date();
 
+    listingData.user = req.user._id;
+    listingData.username = req.user.name;
+
+
     try {
         const createdListing = await Listing.create(listingData);
         // TODO: redirect to listings/:id
@@ -44,6 +48,7 @@ async function show(req, res, next) {
     const id = req.params.id
     const showListing = await Listing.findById(id)
     let auctions = await Auction.find({listing: new ObjectId(id)})
+    let user = req.user
     
     if (auctions.length > 0) {
         auctions.forEach(a=>{
@@ -57,7 +62,7 @@ async function show(req, res, next) {
         auctions[0].accepted = true
     }
 
-    res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
+    res.render('listings/show', { title: showListing.title, listing: showListing, auctions, user })
 }
 
 async function edit(req, res, next) {

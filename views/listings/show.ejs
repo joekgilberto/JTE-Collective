@@ -9,7 +9,8 @@
         <p>
             <%= listing.description%>
         </p>
-        <p>Posted: <%= listing.listingDate.toLocaleString() %>
+        <!-- TODO: REMOVE IF, IF WE REMOVE ORPHANS-->
+        <p>Posted: <%= listing.listingDate.toLocaleString() %><% if(listing.username) {%> by <%= listing.username %> <% } %>
         </p>
         <% if(listing.sold===false){ %>
             <p>For Sale</p>
@@ -17,11 +18,12 @@
                 <p>Sold</p>
                 <%}%>
 
-
+        <% if(user?._id.equals(listing.user)){ %>
         <a href="/listings/<%=listing._id%>/edit"><button>Edit</button></a>
         <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
             <button type="" submit>Delete</button>
         </form>
+        <%}  %>
     </section>
 
     <section class="bids">
@@ -31,6 +33,7 @@
                 <p>
                     $<%=a.offer%> <% if (a.accepted){ %>Accepted<% } else { %>Pending<% } %>
                 </p>
+                <!-- TODO: ADD AUCTION EQUALS FUNCTION WITH USER.ID-->
                 <form action="/listings/<%= listing._id %>/auction/<%=a._id%>?_method=DELETE" method="POST">
                     <button type="submit">X</button>
                 </form>
