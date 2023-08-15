@@ -319,6 +319,7 @@ section {
 .new-inputs input,.edit-inputs input{
   font-size: 20px;
   font-weight: 300;
+  width: 165px;
 }
 
 .new-title-price,.edit-title-price{
@@ -348,6 +349,17 @@ section {
 .edit-sold{
   width: auto !important;
   padding-bottom: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.sold-check{
+  width: 30x;
+  height: 30px;
+}
+
+.sold-check:hover{
+  cursor: pointer;
 }
 
 .new-submit, .edit-submit{
