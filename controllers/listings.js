@@ -15,6 +15,9 @@ module.exports = {
 
 async function index(req, res, next) {
     const listings = await Listing.find({})
+    listings.sort((a,b)=>{
+        return b.listingDate - a.listingDate
+    })
     res.render('index', { title: 'All Listings', listings });
 }
 
