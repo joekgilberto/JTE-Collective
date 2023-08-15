@@ -7,14 +7,15 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-    <header class="header">
+    <header>
         <h1>JTE Collective</h1>
         <div class="nav-buttons">
-            <a href="/listings"><button class="button">Browse</button></a>
+            <a href="/listings"><button <%- title === 'All Listings' ? 'class="active"' : '' %>>Browse</button></a>
             <% if (user) { %>
-                <a href="/listings/new"><button class="button">New Listing</button></a>
-                <a href="/logout"><button class="button">Log Out</button></a>
+                <a href="/listings/new"><button <button <%- title === 'New Listing' ? 'class="active"' : '' %>>>New Listing</button></a>
+                <a href="/logout"><button>Log Out</button></a>
             <% } else { %>
-                <a href="/auth/google" class="button"><button class="button">Login</button></a>
+                <a href="/auth/google"><button class="button">Login</button></a>
             <% } %>    </div>
       </header>
+      <main>

@@ -1,52 +1,80 @@
 <%- include('../partials/header.ejs') %>
-    <section class="categories">
+
+
+<section class="show-page">
+    <section class="show-listing">
+        <div class="show-title-post">
         <h1>
             <%= listing.title%>
         </h1>
         <p>$<%= listing.price%>
         </p>
+        </div>
         <!-- TOOD: remove description -->
-        <p>
+        <p class="show-description">
+            <span class="about">About:</span><br />
             <%= listing.description%>
         </p>
-        <!-- TODO: REMOVE IF, IF WE REMOVE ORPHANS-->
-        <p>Posted: <%= listing.listingDate.toLocaleString() %><% if(listing.username) {%> by <%= listing.username %> <% } %>
-        </p>
-        <% if(listing.sold===false){ %>
-            <p>For Sale</p>
-            <% } else if(listing.sold===true) { %>
-                <p>Sold</p>
-                <%}%>
-
-        <% if(user?._id.equals(listing.user)){ %>
-        <a href="/listings/<%=listing._id%>/edit"><button>Edit</button></a>
-        <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
-            <button type="" submit>Delete</button>
-        </form>
-        <%}  %>
+        <div class="show-status-date">
+            <% if(listing.sold===false){ %>
+                <p class="for-sale">For Sale</p>
+                <% } else if(listing.sold===true) { %>
+                    <p class="sold">Sold</p>
+                    <%}%>
+                        <p class="show-date">Posted:<br />
+                            <% const
+                                month=["January","February","March","April","May","June","July","August","September","October","November","December"];
+                                %>
+                                <%= month[listing.listingDate.getMonth()] %>
+                                    <%= listing.listingDate.getDate() %>,
+                                        <%= listing.listingDate.getFullYear() %>
+                        </p>
+        </div>
+        <div class="show-buttons">
+            <% if(user?._id.equals(listing.user)){ %>
+            <a href="/listings/<%=listing._id%>/edit"><button class="edit">Edit</button></a>
+            <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+                <button class="delete" type="submit">Delete</button>
+            </form>
+            <% } %>
+        </div>
     </section>
 
-    <section class="bids">
+    <section class="show-bidding">
         <h2>Bids</h2>
-        <% if (auctions.length> 0){ %>
-            <% auctions.forEach((a)=>{ %>
-                <p>
-                    $<%=a.offer%> <% if (a.accepted){ %>Accepted<% } else { %>Pending<% } %>
-                </p>
-                <!-- TODO: ADD AUCTION EQUALS FUNCTION WITH USER.ID-->
-                <form action="/listings/<%= listing._id %>/auction/<%=a._id%>?_method=DELETE" method="POST">
-                    <button type="submit">X</button>
-                </form>
-                <% }) %>
-                    <% } %>
-                    <% if (user) { %>
-                        <form action="/listings/<%=listing._id%>/auction/new" method="POST">
-                            <label>Offer: $
-                                <input type="number" min="0" step="0.01" name="offer" required>
-                            </label>
-                            <button type="submit">Place Bid</button>
+        <div class="show-bids">
+            <% if (auctions.length> 0){ %>
+                <% auctions.forEach((a)=>{ %>
+                    <div class="bid">
+                        <div class="bid-info">
+                        <p>
+                            $<%=a.offer%>
+                        </p>
+                        <!-- TODO: ADD AUCTION EQUALS FUNCTION WITH USER.ID-->
+                        <% if (a.accepted){ %><p class = "accepted">Accepted</p><% } else { %><p class="considering">Considering</p><% } %>
+                    </div>
+                        <form action="/listings/<%= listing._id %>/auction/<%=a._id%>?_method=DELETE" method="POST">
+                            <button class="show-x" type="submit">X</button>
                         </form>
-                    <% } %>
+                    </div>
+
+                    <% }) %>
+                        <% } else { %>
+                            <p class="no-bids">No bids yet</p>
+                            <% } %>
+        </div>
+        <div class="show-offer">
+            <% if (user) { %>
+            <form class="show-offer-input" action="/listings/<%=listing._id%>/auction/new" method="POST">
+                <label>Offer: $
+                    <input type="number" min="0" step="0.01" name="offer" required>
+                </label>
+                <button type="submit">Place Bid</button>
+            </form>
+            <% } %>
+
+        </div>
     </section>
+</section>
 
     <%- include('../partials/footer.ejs') %>
