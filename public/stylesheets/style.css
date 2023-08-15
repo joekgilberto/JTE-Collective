@@ -25,8 +25,68 @@ body {
 }
 
 .list {
+  display: inline-block;
+  color: rgb(72, 170, 122);
+  font-family: "CustomFont", sans-serif;
+  margin: 20px;
+  font-weight: bold;
+  text-align: auto;
+  font-size: 22px;
+  background-image: linear-gradient(to bottom, rgb(167, 220, 226), rgb(72, 170, 122));
+  
   padding: 10px;
+  border-radius: 10px;
+  width: 300px;
+  height: 150px;
 }
+
+
+.categories {
+  display: inline-block;
+  color: rgb(72, 170, 122);
+  font-family: "CustomFont", sans-serif;
+  margin: 20px;
+  font-weight: bold;
+  text-align: auto;
+  font-size: 22px;
+  background-color: rgba(167, 220, 226, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  width: 400px;
+}
+
+.bids {
+  display: inline-block;
+  color: rgb(72, 170, 122);
+  font-family: "CustomFont", sans-serif;
+  margin: 20px;
+  font-weight: bold;
+  text-align: auto;
+  font-size: 22px;
+  background-color: rgba(167, 220, 226, 0.7);
+  padding: 10px;
+  border-radius: 10px;
+  width: 400px;
+}
+
+a {
+  
+  color: white;
+  
+}
+
+#Title-Price {
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+}
+
+#Post-Info {
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+}
+
 
 section{
   padding: 10px;

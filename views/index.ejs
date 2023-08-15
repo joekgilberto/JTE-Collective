@@ -10,14 +10,24 @@
   <section class="listings">
     <% for (let list of listings){ %>
       <section class="list">
-        <p>
+
+       <div id="Title-Price">
+        <p class="P1">
           <%= list.title%>
         </p>
-        <p>$<%= list.price%>
+        <p class="P2">
+          $<%= list.price%>
         </p>
-        <p>Posted: <%= list.listingDate.toLocaleString() %>
+        </div>
+
+        <div id="Post-Info">
+        <p class="P3">
+          Posted: <%= list.listingDate.toLocaleString() %>
         </p>
-        <p><a href="/listings/<%=list._id%>">More Info</a></p>
+        <p class="P4">
+          <a href="/listings/<%=list._id%>">More Info</a>
+        </p>
+
       </section>
       <% }%>
   </section>
