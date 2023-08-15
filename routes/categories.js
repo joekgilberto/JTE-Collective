@@ -1,20 +1,22 @@
-// var express = require('express');
-// var router = express.Router();
-// const categoriesCtrl = require('../controllers/categories')
+var express = require('express');
+var router = express.Router();
+const categoryCtrl = require('../controllers/categories')
 
-// /* GET users listing. */
-// router.get('/', categoriesCtrl.index)
+/* GET users listing. */
+router.get('/categories', categoryCtrl.index);
 
-// router.get('/new', categoriesCtrl.new)
+router.get('/categories/new', categoryCtrl.new);
 
-// router.get('/:id', categoriesCtrl.show)
+router.get('/categories/:id', categoryCtrl.show);
 
-// router.get('/:id/edit', categoriesCtrl.edit)
+// router.get('/categories/:id/edit', categoryCtrl.edit);
 
-// router.post('/', categoriesCtrl.create);
+router.post('/categories', categoryCtrl.create);
 
-// router.put('/:id', categoriesCtrl.update)
+router.post('/listings/:id/categories', categoryCtrl.addToCategory);
 
-// router.delete('/:id', categoriesCtrl.delete)
+// router.put('/categories/:id', categoryCtrl.update);
 
-// module.exports = router;
+// router.delete('/:id', categoryCtrl.delete)
+
+module.exports = router;

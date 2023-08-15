@@ -13,8 +13,25 @@
         </h1>
         <p>$<%= listing.price%>
         </p>
-        <p>Category: <%= currentCategory.title%>
-        </p>
+        <% if(listing.category.length){%>
+            <p>Category</p>
+            <ul>
+                <% listing.category.forEach(c=>{%>
+                    <li><%=c.title%></li>
+                <% })%>
+            </ul>
+        <% } %>
+        <p>Add to Category</p>
+        <form method="POST" action="/listings/<%=listing._id%>/categories">
+            <select name="categoryId">
+                <% categories.forEach(c =>{%>
+                    <option value="<%= c._id %>"><%= c.title %></option>
+                <%})%>
+            </select>
+            <input type="submit" value="Add Category" />
+        </form>
+        <!-- <p>Category: <%#= currentCategory.title%>
+        </p> -->
         <!-- TOOD: remove description -->
         <p>
             <%= listing.description%>

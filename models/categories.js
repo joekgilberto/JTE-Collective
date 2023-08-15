@@ -6,15 +6,19 @@ const Schema = mongoose.Schema;
 const categorySchema = new Schema({
     title: {
         type: String,
-        enum: ['Electronics', 'Bikes', 'Pets', 'Clothing'],
-        required: true 
+        // enum: ['Electronics', 'Bikes', 'Pets', 'Clothing'],
+        required: true,
+        unique: true,
     },
-    image: {
-        type: Buffer,
-        contentType: String
-        //TODO: default
-    },
+    // image: {
+    //     type: Buffer,
+    //     contentType: String
+    //     //TODO: default
+    // },
 
+},
+{
+    timestamps: true,
 });
 
 // categorySchema.pre('save', function (next) {

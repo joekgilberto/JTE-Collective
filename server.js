@@ -11,7 +11,8 @@ require('./config/database')
 
 var indexRouter = require('./routes/index');
 var listingsRouter = require('./routes/listings');
-var auctionsRouter = require('./routes/auctions')
+var auctionsRouter = require('./routes/auctions');
+var categoriesRouter = require('./routes/categories');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(methodOverride('_method'))
 app.use('/', indexRouter);
 app.use('/listings', listingsRouter);
 app.use('/', auctionsRouter);
+app.use('/', categoriesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

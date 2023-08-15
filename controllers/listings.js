@@ -16,9 +16,16 @@ module.exports = {
 
 async function index(req, res, next) {
     try {
-        const listings = await Listing.find({})
-        console.log(listings)
-        res.render('index', { title: 'All Listings', listings});
+        const id = req.params.id
+        const listings = await Listing.find(id).populate('category');
+        // const categories = await listings.findById(id).populate('category');
+
+        const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
+
+        // console.log(listings)
+        // console.log(listings[0].category.title)
+        // console.log(listings[0].category[0].title)
+        res.render('index', { title: 'All Listings', listings, categories: allCategories });
     } catch (err) {
         console.log(err);
         next(err);
@@ -38,7 +45,7 @@ async function create(req, res, next) {
     
 
     try {
-        listingData.category = await Category.find({ title: listingData.category })
+        // listingData.category = await Category.find({ title: listingData.category })
         const createdListing = await Listing.create(listingData);
         // TODO: redirect to listings/:id
         console.log(createdListing)
@@ -50,24 +57,31 @@ async function create(req, res, next) {
 }
 
 async function show(req, res, next) {
-    const id = req.params.id
-    const showListing = await Listing.findById(id);
-    let auctions = await Auction.find({listing: new ObjectId(id)});
-    const currentCategory = await Category.findById(showListing.category);
+    try {
+        const id = req.params.id
+        const showListing = await Listing.findById(id).populate('category');
+        let auctions = await Auction.find({listing: new ObjectId(id)});
+        // const currentCategory = await Category.findById(showListing.category);
+
+        const allCategories = await Category.find({ _id : { $nin: showListing.category }}).sort('title');
+        
+        if (auctions.length > 0) {
+            auctions.forEach(a=>{
+                a.accepted = false
+            })
     
-    if (auctions.length > 0) {
-        auctions.forEach(a=>{
-            a.accepted = false
-        })
+            auctions.sort((a, b) => {
+                return b.offer - a.offer
+            })
+    
+            auctions[0].accepted = true
+        }
 
-        auctions.sort((a, b) => {
-            return b.offer - a.offer
-        })
-
-        auctions[0].accepted = true
+        res.render('listings/show', { title: showListing.title, listing: showListing, auctions, categories: allCategories });
+    } catch (err) {
+        console.log(err);
+        next(Error(err));
     }
-
-    res.render('listings/show', { title: showListing.title, listing: showListing, auctions, currentCategory })
 }
 
 async function edit(req, res, next) {

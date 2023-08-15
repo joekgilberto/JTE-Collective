@@ -5,6 +5,7 @@
     <div class="nav-buttons">
       <a href="/listings"><button class="button">Browse</button></a>
       <a href="/listings/new"><button class="button">New Listing</button></a>
+      <a href="/categories/new"><button class="button">New Category</button></a>
     </div>
   </header>
   <section class="listings">
@@ -15,6 +16,14 @@
         </p>
         <p>$<%= list.price%>
         </p>
+        <% if(list.category.length){%>
+          <p>Category</p>
+          <ul>
+              <% list.category.forEach(c=>{%>
+                  <li><%=c.title%></li>
+              <% })%>
+          </ul>
+        <% } %>
         <p>Category: <%= list.category%>
         </p>
         <p>Posted: <%= list.listingDate.toLocaleString() %>
