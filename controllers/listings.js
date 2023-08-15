@@ -1,6 +1,7 @@
 // const { default: mongoose } = require('mongoose')
 const Listing = require('../models/listings')
 const Auction = require('../models/auctions')
+const Category = require('../models/categories')
 const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
@@ -14,9 +15,14 @@ module.exports = {
 }
 
 async function index(req, res, next) {
-    const listings = await Listing.find({})
-    console.log(listings)
-    res.render('index', { title: 'All Listings', listings });
+    try {
+        const listings = await Listing.find({})
+        console.log(listings)
+        res.render('index', { title: 'All Listings', listings});
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
 }
 
 async function newListing(req, res, next) {
@@ -29,7 +35,10 @@ async function create(req, res, next) {
     //TODO: deal with absence of image
     listingData.listingDate = new Date();
 
+    
+
     try {
+        listingData.category = await Category.find({ title: listingData.category })
         const createdListing = await Listing.create(listingData);
         // TODO: redirect to listings/:id
         console.log(createdListing)
@@ -42,8 +51,9 @@ async function create(req, res, next) {
 
 async function show(req, res, next) {
     const id = req.params.id
-    const showListing = await Listing.findById(id)
-    let auctions = await Auction.find({listing: new ObjectId(id)})
+    const showListing = await Listing.findById(id);
+    let auctions = await Auction.find({listing: new ObjectId(id)});
+    const currentCategory = await Category.findById(showListing.category);
     
     if (auctions.length > 0) {
         auctions.forEach(a=>{
@@ -57,7 +67,7 @@ async function show(req, res, next) {
         auctions[0].accepted = true
     }
 
-    res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
+    res.render('listings/show', { title: showListing.title, listing: showListing, auctions, currentCategory })
 }
 
 async function edit(req, res, next) {

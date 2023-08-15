@@ -11,6 +11,10 @@ const listingSchema = new Schema({
     //     contentType: String
     //     //TODO: default
     // },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
+    },
     listingDate: {
         type: Date,
         default: new Date()

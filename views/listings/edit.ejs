@@ -22,6 +22,15 @@
             <input type="number" name="price" min="0" value="<%= listing.price %>" required>
         </label><br>
 
+        <label>Category:
+          <select name="category" required>
+            <option value="Electronics" <%= listing.category === 'Electronics' ? 'selected' : '' %>>Electronics</option>
+            <option value="Bikes" <%= listing.category === 'Bikes' ? 'selected' : '' %>>Bikes</option>
+            <option value="Pets" <%= listing.category === 'Pets' ? 'selected' : '' %>>Pets</option>
+            <option value="Clothing" <%= listing.category === 'Clothing' ? 'selected' : '' %>>Clothing</option>
+          </select>
+        </label><br>
+
         <!-- <label>Image:
             <input type="file" id="image" name="image" value=""/>
         </label> -->
