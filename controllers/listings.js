@@ -95,7 +95,6 @@ async function update(req, res, next) {
 
 async function deleteListing(req, res, next) {
     const id = req.params.id;
-
     Listing.deleteOne({ _id: id }).then(function () {
         res.redirect(`/listings`)
     })

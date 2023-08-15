@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const ensureLoggedIn = require('../config/ensureLoggedIn');
 const listingsCtrl = require('../controllers/listings')
 
 /* GET users listing. */
@@ -11,10 +12,10 @@ router.get('/:id', listingsCtrl.show)
 
 router.get('/:id/edit', listingsCtrl.edit)
 
-router.post('/', listingsCtrl.create);
+router.post('/', ensureLoggedIn, listingsCtrl.create);
 
-router.put('/:id', listingsCtrl.update)
+router.put('/:id', ensureLoggedIn, listingsCtrl.update)
 
-router.delete('/:id', listingsCtrl.delete)
+router.delete('/:id', ensureLoggedIn, listingsCtrl.delete)
 
 module.exports = router;
