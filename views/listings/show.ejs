@@ -21,15 +21,6 @@
                 <% })%>
             </ul>
         <% } %>
-        <p>Add to Category</p>
-        <form method="POST" action="/listings/<%=listing._id%>/categories">
-            <select name="categoryId">
-                <% categories.forEach(c =>{%>
-                    <option value="<%= c._id %>"><%= c.title %></option>
-                <%})%>
-            </select>
-            <input type="submit" value="Add Category" />
-        </form>
         <!-- <p>Category: <%#= currentCategory.title%>
         </p> -->
         <!-- TOOD: remove description -->

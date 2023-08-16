@@ -2,6 +2,7 @@
 const Listing = require('../models/listings')
 const Auction = require('../models/auctions')
 const Category = require('../models/categories')
+const CatController = require('../controllers/categories')
 const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
@@ -33,11 +34,18 @@ async function index(req, res, next) {
 }
 
 async function newListing(req, res, next) {
-    res.render('listings/new', { title: 'New Listing', errorMsg: '' });
+    const id = req.params.id
+    const listings = await Listing.find(id).populate('category');
+
+    const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
+
+    res.render('listings/new', { title: 'New Listing', listings, categories: allCategories, errorMsg: '' });
 }
 
 async function create(req, res, next) {
     const listingData = { ...req.body };
+    const listingId = req.params.id
+    const categoryId = req.body.categoryId
 
     //TODO: deal with absence of image
     listingData.listingDate = new Date();
@@ -47,6 +55,7 @@ async function create(req, res, next) {
     try {
         // listingData.category = await Category.find({ title: listingData.category })
         const createdListing = await Listing.create(listingData);
+        CatController.addToCategory(req, res)
         // TODO: redirect to listings/:id
         console.log(createdListing)
         res.redirect('/listings');
@@ -64,6 +73,7 @@ async function show(req, res, next) {
         // const currentCategory = await Category.findById(showListing.category);
 
         const allCategories = await Category.find({ _id : { $nin: showListing.category }}).sort('title');
+        console.log(allCategories);
         
         if (auctions.length > 0) {
             auctions.forEach(a=>{
