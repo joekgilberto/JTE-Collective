@@ -52,14 +52,19 @@ async function create(req, res, next) {
 
     try {
         // listingData.category = await Category.find({ title: listingData.category })
-        const createdListing = await Listing.create(listingData);
-        CatController.addToCategory(req, res)
+        const createdListing = await Listing.create(listingData).then(function(result){
+            result.category.push(req.body.categoryId)
+            result.save()
+            console.log("result",result)
+        })
         // TODO: redirect to listings/:id
-        console.log(createdListing)
         res.redirect('/listings');
     } catch (err) {
+        const id = req.params.id
+        const listings = await Listing.find(id).populate('category');
+        const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
         console.log(err);
-        res.render('listings/new', { title: 'New Listing', errorMsg: err.message });
+        res.render('listings/new', { title: 'New Listing', errorMsg: err.message, categories: allCategories });
     }
 }
 
