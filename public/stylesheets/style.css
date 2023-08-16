@@ -52,6 +52,7 @@ nav button {
   font-size: 24px;
   border: none;
   margin: 0 10px;
+  
 }
 
 .active {
@@ -89,6 +90,9 @@ main {
   padding: 0px 10px;
   background-color: #dbe5e9;
   border-radius: 15px 15px 0 0;
+  border-top: 2px solid grey;
+  border-left: 2px solid grey;
+  border-right: 2px solid grey;
 
 }
 
@@ -101,6 +105,9 @@ main {
   padding: 20px 10px 0 10px;
   background-image: linear-gradient(to bottom, rgb(167, 220, 226), rgb(72, 170, 122));
   border-radius: 0 0 15px 15px;
+  border-left: 2px solid grey;
+  border-bottom: 2px solid grey;
+  border-right: 2px solid grey;
   margin: 0;
   color: #f4f4f4;
 }
