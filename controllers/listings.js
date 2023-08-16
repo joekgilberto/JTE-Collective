@@ -44,8 +44,6 @@ async function newListing(req, res, next) {
 
 async function create(req, res, next) {
     const listingData = { ...req.body };
-    const listingId = req.params.id
-    const categoryId = req.body.categoryId
 
     //TODO: deal with absence of image
     listingData.listingDate = new Date();
