@@ -46,7 +46,7 @@ async function show(req, res, next) {
         const auctions = await Auction.find({ listing: new ObjectId(id) })
 
         if (auctions.length > 0) {
-            auctions.forEach(a => {
+            auctions.forEach((a) => {
                 a.accepted = false
             })
 
@@ -55,6 +55,10 @@ async function show(req, res, next) {
             })
 
             auctions[0].accepted = true
+
+            auctions.forEach(async (a) => {
+                await a.save()
+            })
         }
 
         res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
@@ -94,10 +98,13 @@ async function update(req, res, next) {
 async function deleteListing(req, res, next) {
     const id = req.params.id;
 
-    Listing.deleteOne({ _id: id }).then(function () {
-        res.redirect(`/listings`)
-    })
-        .catch(function (err) {
-            next(err)
+    Auction.deleteMany({ listing: id }).then(function(){
+        Listing.deleteOne({ _id: id }).then(function () {
+            res.redirect(`/listings`)
         })
+            .catch(function (err) {
+                next(err)
+            })
+    })
+
 }
