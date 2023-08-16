@@ -37,11 +37,13 @@ async function addToCategory(req, res){
     const categoryId = req.body.categoryId
 
     try {
-        const foundListing = await Listing.findById(listingId)
-        foundListing.category.push(categoryId)
-        await foundListing.save()
-
-        // res.redirect(`/listings/${foundListing._id}`)
+        const saving = await Listing.findById(listingId).then(async function(result){
+            await result.category.push(categoryId)
+        }).then(async function(result){
+            await result.save()
+        })
+        console.log("saving",saving)
+        res.redirect(`/listings/${foundListing._id}`)
     } catch (err) {
         console.log(err)
         res.redirect('/')

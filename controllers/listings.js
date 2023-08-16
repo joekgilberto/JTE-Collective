@@ -52,10 +52,11 @@ async function create(req, res, next) {
 
     try {
         // listingData.category = await Category.find({ title: listingData.category })
-        const createdListing = await Listing.create(listingData).then(function(){
-            console.log(createdListing)
+        const createdListing = await Listing.create(listingData).then(function(result){
+            result.category.push(req.body.categoryId)
+            result.save()
+            console.log("result",result)
         })
-        
         // TODO: redirect to listings/:id
         res.redirect('/listings');
     } catch (err) {
