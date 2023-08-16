@@ -41,7 +41,7 @@ async function addToCategory(req, res){
         foundListing.category.push(categoryId)
         await foundListing.save()
 
-        res.redirect(`/listings/${foundListing._id}`)
+        // res.redirect(`/listings/${foundListing._id}`)
     } catch (err) {
         console.log(err)
         res.redirect('/')
