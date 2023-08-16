@@ -59,12 +59,14 @@
                                 <% } %>
             </div>
             <div class="show-offer">
+                <% if(listing.sold === false) { %>
                 <form class="show-offer-input" action="/listings/<%=listing._id%>/auction/new" method="POST">
                     <label>Offer: $
                         <input type="number" min="0" step="0.01" name="offer" required>
                     </label>
                     <button type="submit">Place Bid</button>
                 </form>
+                <% } %>
             </div>
         </section>
     </section>
