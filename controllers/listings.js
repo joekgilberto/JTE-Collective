@@ -19,6 +19,9 @@ async function index(req, res, next) {
     try {
         const id = req.params.id
         const listings = await Listing.find(id).populate('category');
+        listings.sort((a,b)=>{
+          return b.listingDate - a.listingDate
+        })
         // const categories = await listings.findById(id).populate('category');
 
         const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
@@ -48,7 +51,8 @@ async function create(req, res, next) {
     //TODO: deal with absence of image
     listingData.listingDate = new Date();
 
-    
+    listingData.user = req.user._id;
+    listingData.username = req.user.name;
 
     try {
         // listingData.category = await Category.find({ title: listingData.category })
@@ -133,11 +137,10 @@ async function update(req, res, next) {
 
 async function deleteListing(req, res, next) {
     const id = req.params.id;
-
     Listing.deleteOne({ _id: id }).then(function () {
         res.redirect(`/listings`)
     })
         .catch(function (err) {
-            console.log(err)
+            next(err)
         })
 }

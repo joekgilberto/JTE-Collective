@@ -23,6 +23,9 @@ const listingSchema = new Schema({
         type: Boolean,
         default: false
     },
+    //add required true
+    user: { type: Schema.Types.ObjectId },
+    username: { type: String }
 })
 
 module.exports = mongoose.model('Listing', listingSchema)
