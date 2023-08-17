@@ -101,15 +101,16 @@ async function edit(req, res, next) {
     const id = req.params.id;
     const results = await Listing.findById(id).populate('category');
 
-    const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
+    const allCategories = await Category.find({}).sort('title');
     
-    res.render('listings/edit', { title: `Edit Listing`, listing: results, id, errorMsg: '' })
+    res.render('listings/edit', { title: `Edit Listing`, listing: results, categories: allCategories, id, errorMsg: '' })
 }
 
 async function update(req, res, next) {
     const id = req.params.id
     const updatedData = req.body
-
+    updatedData.category = [updatedData.categoryId]
+    
     if (updatedData.sold === 'on') {
         updatedData.sold = true
     } else {
@@ -122,6 +123,8 @@ async function update(req, res, next) {
             updatedData,
             { new: true }
         )
+        console.log(updatedData.categoryId)
+        // const allCategories = await Category.find
         res.redirect(`/listings/${id}`)
     } catch (err) {
         next(err)
