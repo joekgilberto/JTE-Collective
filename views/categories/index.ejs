@@ -11,7 +11,13 @@
   <% categories.forEach(c => {%>
     <h2><%= c.title %></h2>
     <% listings.forEach(listing => { %>
-        <% if (c?._id.equals(listing.category)){ %> <p><a href="/listings/<%=listing.id%>"><%=listing.title%><a><p> <% } %>
+        <% if (c._id.toString() === listing.category.toString()){ %>
+            <p>
+                <a href="/listings/<%=listing._id%>">
+                    <%=listing.title%>
+                <a>
+            <p>
+        <% } %>
     <%})%>
   <%})%>
 
