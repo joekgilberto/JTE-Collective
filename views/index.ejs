@@ -4,7 +4,8 @@
     <% for (let list of listings){ %>
       <section class="index-list">
 
-        <div class="index-title-price">
+        <div class="index-title-price-cat">
+          <div class="index-title-price">
           <h2>
             <%= list.title%>
           </h2>
@@ -13,12 +14,14 @@
           </h2>
         </div>
 
+          <% if(list.category.length){%>
+            <% list.category.forEach(c=>{%>
+              <p class="index-category">Category: <%=c.title%></p>
+            <% })%>
+        </div>
+
 
         <div class="index-post-info">
-        <% if(list.category.length){%>
-          <% list.category.forEach(c=>{%>
-            <p>Category: <%=c.title%></p>
-          <% })%>
         <% } %>
           <p class="index-link">
             <a href="/listings/<%=list._id%>">More Info</a>

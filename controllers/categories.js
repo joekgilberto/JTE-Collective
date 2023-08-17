@@ -34,7 +34,7 @@ async function create(req,res,next){
 async function newCategory(req, res) {
     res.render("categories/new", {
         categories: await Category.find({}),
-        title: 'Add Category',
+        title: 'New Category',
         errorMsg: "",
     });
 }

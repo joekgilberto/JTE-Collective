@@ -47,9 +47,9 @@ nav button {
   background-color: transparent;
   color: #f4f4f4;
   border-radius: 15px;
-  width: 175px;
+  width: 140px;
   height: 50px;
-  font-size: 24px;
+  font-size: 18px;
   border: none;
   margin: 0 10px;
   
@@ -81,12 +81,13 @@ main {
   height: 150px;
 }
 
-.index-title-price {
+.index-title-price-cat {
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 75px;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  align-items: left;
   padding: 0px 10px;
   background-color: #dbe5e9;
   border-radius: 15px 15px 0 0;
@@ -94,6 +95,13 @@ main {
   border-left: 2px solid grey;
   border-right: 2px solid grey;
 
+}
+
+.index-title-price {
+  width: 100%;
+  height: 35px;
+display: flex;
+justify-content: space-between;
 }
 
 .index-post-info {
@@ -139,9 +147,25 @@ section {
 
 .show-title-post{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: baseline;
   color: rgb(79, 185, 133);
+}
+
+.show-title-price{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.show-category>p{
+  padding: 0;
+}
+
+.black-text{
+  color:#000;
 }
 
 .show-description{
@@ -153,6 +177,7 @@ section {
 .bold-underline{
   font-weight: 500;
   text-decoration: underline;
+  color: rgb(79, 185, 133);
 }
 
 .show-status-date{
@@ -312,7 +337,7 @@ section {
   margin-right: 10px;
 }
 
-.new-listing,.edit-listing{
+.new-listing,.edit-listing,.cat-listing{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -321,7 +346,7 @@ section {
   font-size: 22px;
 }
 
-.new-listing>h1,.edit-listing>h1{
+.new-listing>h1,.edit-listing>h1,.cat-listing>h1{
   padding: 20px 0;
   width: 700px;
   border-radius: 15px 15px 0 0;
@@ -332,7 +357,7 @@ section {
   margin-top: 20px;
 }
 
-.new-inputs,.edit-inputs{
+.new-inputs,.edit-inputs,.cat-inputs{
   width: 700px;
   height: 400px;
   display: flex;
@@ -342,7 +367,7 @@ section {
   background-color: #dbe5e9;
 }
 
-.new-inputs input,.edit-inputs input{
+.new-inputs input,.edit-inputs input,.cat-input input{
   font-size: 20px;
   font-weight: 300;
   width: 165px;
@@ -388,7 +413,7 @@ section {
   cursor: pointer;
 }
 
-.new-submit, .edit-submit{
+.new-submit, .edit-submit, .cat-submit{
   padding: 20px 0;
   width: 700px;
   border-radius: 0 0 15px 15px;
@@ -397,7 +422,7 @@ section {
   text-align: center;
 }
 
-.new-submit button, .edit-submit button{
+.new-submit button, .edit-submit button, .cat-submit button{
   border: none;
   background-color: #f4f4f4;
   color: rgb(79, 185, 133);
@@ -405,6 +430,19 @@ section {
   height: 40px;
   font-size: 22px;
   border-radius: 10px;
+}
+
+.cat-check{
+  width: 50%;
+  text-align: center;
+}
+
+.cats>h2{
+  color: #000 !important;
+}
+
+.cats>p>a{
+  color: rgb(79, 185, 133) !important;
 }
 
 footer{
