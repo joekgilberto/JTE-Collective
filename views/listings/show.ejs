@@ -1,6 +1,4 @@
 <%- include('../partials/header.ejs') %>
-
-
 <section class="show-page">
     <section class="show-listing">
         <div class="show-title-post">
@@ -10,7 +8,6 @@
         <p>$<%= listing.price%>
         </p>
         </div>
-        <!-- TOOD: remove description -->
         <div class="show-description">
         <p>
             <span class="bold-underline">About:</span><br />
@@ -46,7 +43,6 @@
             <% } %>
         </div>
     </section>
-
     <section class="show-bidding">
         <h2>Auction</h2>
         <div class="show-bids">
@@ -57,7 +53,6 @@
                         <p>
                             $<%=a.offer%>
                         </p>
-                        <!-- TODO: ADD AUCTION EQUALS FUNCTION WITH USER.ID-->
                         <% if (a.accepted){ %><p class = "accepted">Accepted</p><% } else { %><p class="considering">Considering</p><% } %>
                     </div>
                     <div class="show-bid-delete">
