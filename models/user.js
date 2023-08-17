@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+// Schema for Google O-auth
 const userSchema = new Schema({
   name: String,
   googleId: {

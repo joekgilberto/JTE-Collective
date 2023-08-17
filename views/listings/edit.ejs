@@ -3,6 +3,7 @@
     <h1>
       <%=title%>
     </h1>
+    <!-- Form to edit existing listings -->
     <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
       <div class="edit-inputs">
         <div class="edit-title-price">
