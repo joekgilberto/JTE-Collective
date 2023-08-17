@@ -35,6 +35,12 @@ An Express.js web application that allows users to login, post listings for sale
 - Method Override
 - Passport
 
+# Resources
+- [GA Google OAuth Tutorial](https://git.generalassemb.ly/SEIR-710-EC/Course-Materials/blob/main/02_Lesson_Materials/Unit_2/resources/9-authentication/9.1-oauth-authentication-full.md)
+- [MDN Web Docs](https://developer.mozilla.org/en-US/)
+- [W3 Schools](https://www.w3schools.com/)
+- [StackOverflow](https://stackoverflow.com/)
+
 # Getting Started
 
 [Click to start shopping!](https://jte-collective-a4dbe6e33fa8.herokuapp.com/)
