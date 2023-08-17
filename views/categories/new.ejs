@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<h2><%=title%></h2>
+<div>
+  <% if (categories.length){%>
+  <h3>Please first ensure that the Category is not in the dropdown</h3>
+  <select name="categoryId">
+    <% categories.forEach(c=>{%>
+    <option value="<%=c._id%>"><%=c.title%></option>
+    <%})%>
+  </select>
+  <%}%>
+</div>
+<form action="/categories" method="POST">
+  <label>Title: <input type="text" name="title" required/> </label>
+  <button type="submit">Add Category</button>
+</form>
+
+<p><%= errorMsg %></p>
+
+<%- include('../partials/footer') %>

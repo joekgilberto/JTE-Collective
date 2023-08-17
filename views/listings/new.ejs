@@ -10,7 +10,6 @@
           <label>Title:
             <input type="text" name="title" required>
           </label><br>
-
           <label>Price: $
             <input type="number" name="price" min="0" required>
           </label><br>
@@ -19,9 +18,31 @@
           <input type="text" name="description" required>
         </label><br>
 
+        <label>Category:
+          <select name="categoryId">
+            <% categories.forEach(c =>{%>
+              <option value="<%= c._id %>">
+                <%= c.title %>
+              </option>
+            <%})%>
+          </select>
+          <!-- <input type="submit" value="Add Category" /> -->
+        </label><br>
+
+        <!-- <label>Category:
+          <select name="category" required>
+            <option value=""></option>
+            <option value="Electronics">Electronics</option>
+            <option value="Bikes">Bikes</option>
+            <option value="Pets">Pets</option>
+            <option value="Clothing">Clothing</option>
+          </select>
+        </label><br> -->
+
         <!-- <label>Image:
             <input type="file" id="image" name="image" value=""/>
         </label> -->
+
       </div>
       <div class="new-submit">
         <button type="submit">Add Listing</button>

@@ -7,6 +7,17 @@
         </h1>
         <p>$<%= listing.price%>
         </p>
+        <% if(listing.category.length){%>
+            <p>Category</p>
+            <ul>
+                <% listing.category.forEach(c=>{%>
+                    <li><%=c.title%></li>
+                <% })%>
+            </ul>
+        <% } %>
+        <!-- <p>Category: <%#= currentCategory.title%>
+        </p> -->
+        <!-- TOOD: remove description -->
         </div>
        <!-- Info for specific listings -->
         <div class="show-description">

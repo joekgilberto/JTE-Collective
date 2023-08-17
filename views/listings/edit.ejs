@@ -21,6 +21,20 @@
           <input type="text" name="description" value="<%= listing.description %>" required>
         </label><br>
 
+        <label>Category:
+          <select name="categoryId" required>
+            <% categories.forEach(c =>{%>
+              <option value="<%= c.id %>" <% if(listing?.category[0].equals(c.id)){ %> selected <% } %>>
+                <%= c.title %>
+              </option>
+            <%})%>
+            <!-- <option value="Electronics" <%#= listing.category === 'Electronics' ? 'selected' : '' %>>Electronics</option>
+            <option value="Bikes" <%#= listing.category === 'Bikes' ? 'selected' : '' %>>Bikes</option>
+            <option value="Pets" <%#= listing.category === 'Pets' ? 'selected' : '' %>>Pets</option>
+            <option value="Clothing" <%#= listing.category === 'Clothing' ? 'selected' : '' %>>Clothing</option> -->
+          </select>
+        </label><br>
+
         <!-- <label>Image:
             <input type="file" id="image" name="image" value=""/>
         </label> -->

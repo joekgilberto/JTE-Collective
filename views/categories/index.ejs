@@ -1,0 +1,24 @@
+<%- include('../partials/header.ejs') %>
+
+  <header class="header"> <!-- TODO: put in header partial -->
+    <h1>JTE Collective</h1>
+    <div class="nav-buttons">
+      <a href="/listings"><button class="button">Browse</button></a>
+      <a href="/listings/new"><button class="button">New Listing</button></a>
+      <a href="/categories/new"><button class="button">New Category</button></a>
+    </div>
+  </header>
+  <% categories.forEach(c => {%>
+    <h2><%= c.title %></h2>
+    <% listings.forEach(listing => { %>
+        <% if (c._id.toString() === listing.category.toString()){ %>
+            <p>
+                <a href="/listings/<%=listing._id%>">
+                    <%=listing.title%>
+                <a>
+            <p>
+        <% } %>
+    <%})%>
+  <%})%>
+
+  <%- include('../partials/footer.ejs') %>

@@ -1,6 +1,8 @@
 // const { default: mongoose } = require('mongoose')
 const Listing = require('../models/listings')
 const Auction = require('../models/auctions')
+const Category = require('../models/categories')
+// const CatController = require('../controllers/categories')
 const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
@@ -14,15 +16,33 @@ module.exports = {
 }
 
 async function index(req, res, next) {
-    const listings = await Listing.find({})
-    listings.sort((a,b)=>{
-        return b.listingDate - a.listingDate
-    })
-    res.render('index', { title: 'All Listings', listings });
+    try {
+        const id = req.params.id
+        const listings = await Listing.find(id).populate('category');
+        listings.sort((a,b)=>{
+          return b.listingDate - a.listingDate
+        })
+        // const categories = await listings.findById(id).populate('category');
+
+        const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
+
+        // console.log(listings)
+        // console.log(listings[0].category.title)
+        // console.log(listings[0].category[0].title)
+        res.render('index', { title: 'All Listings', listings, categories: allCategories });
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
 }
 
 async function newListing(req, res, next) {
-    res.render('listings/new', { title: 'New Listing', errorMsg: '' });
+    const id = req.params.id
+    const listings = await Listing.find(id).populate('category');
+
+    const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
+
+    res.render('listings/new', { title: 'New Listing', listings, categories: allCategories, errorMsg: '' });
 }
 
 async function create(req, res, next) {
@@ -34,53 +54,67 @@ async function create(req, res, next) {
     listingData.user = req.user._id;
     listingData.username = req.user.name;
 
-
     try {
-        const createdListing = await Listing.create(listingData);
+        // listingData.category = await Category.find({ title: listingData.category })
+        const createdListing = await Listing.create(listingData).then(function(result){
+            result.category.push(req.body.categoryId)
+            result.save()
+            console.log("result",result)
+        })
         // TODO: redirect to listings/:id
         res.redirect('/listings');
     } catch (err) {
+        const id = req.params.id
+        const listings = await Listing.find(id).populate('category');
+        const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
         console.log(err);
-        res.render('listings/new', { title: 'New Listing', errorMsg: err.message });
+        res.render('listings/new', { title: 'New Listing', errorMsg: err.message, categories: allCategories });
     }
 }
 
 async function show(req, res, next) {
-    const id = req.params.id
     try {
+        const id = req.params.id
+        const showListing = await Listing.findById(id).populate('category');
+        let auctions = await Auction.find({listing: new ObjectId(id)});
+        // const currentCategory = await Category.findById(showListing.category);
 
-        const showListing = await Listing.findById(id)
-        const auctions = await Auction.find({ listing: new ObjectId(id) })
-        const user = req.user
-
+        const allCategories = await Category.find({ _id : { $nin: showListing.category }}).sort('title');
+        console.log(allCategories);
+        
         if (auctions.length > 0) {
-            auctions.forEach(a => {
+            auctions.forEach(a=>{
                 a.accepted = false
             })
-
+    
             auctions.sort((a, b) => {
                 return b.offer - a.offer
             })
-
+    
             auctions[0].accepted = true
         }
 
-        res.render('listings/show', { title: showListing.title, listing: showListing, auctions, user })
+        res.render('listings/show', { title: showListing.title, listing: showListing, auctions, categories: allCategories });
     } catch (err) {
-        next(err)
+        console.log(err);
+        next(Error(err));
     }
 }
 
 async function edit(req, res, next) {
     const id = req.params.id;
-    const results = await Listing.findById(id)
-    res.render('listings/edit', { title: `Edit Listing`, listing: results, id, errorMsg: '' })
+    const results = await Listing.findById(id).populate('category');
+
+    const allCategories = await Category.find({}).sort('title');
+    
+    res.render('listings/edit', { title: `Edit Listing`, listing: results, categories: allCategories, id, errorMsg: '' })
 }
 
 async function update(req, res, next) {
     const id = req.params.id
     const updatedData = req.body
-
+    updatedData.category = [updatedData.categoryId]
+    
     if (updatedData.sold === 'on') {
         updatedData.sold = true
     } else {
@@ -93,6 +127,8 @@ async function update(req, res, next) {
             updatedData,
             { new: true }
         )
+        console.log(updatedData.categoryId)
+        // const allCategories = await Category.find
         res.redirect(`/listings/${id}`)
     } catch (err) {
         next(err)

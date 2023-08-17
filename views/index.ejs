@@ -14,8 +14,12 @@
         </div>
 
 
-        <!-- More Info link to view individual listing -->
         <div class="index-post-info">
+        <% if(list.category.length){%>
+          <% list.category.forEach(c=>{%>
+            <p>Category: <%=c.title%></p>
+          <% })%>
+        <% } %>
           <p class="index-link">
             <a href="/listings/<%=list._id%>">More Info</a>
           </p>
@@ -27,7 +31,6 @@
                 <%= list.listingDate.getDate() %>,
                   <%= list.listingDate.getFullYear() %>
           </p>
-
       </section>
       <% }%>
   </section>
