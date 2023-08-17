@@ -10,8 +10,15 @@ module.exports = {
     addToCategory
 };
 
-async function index(req, res) {
-    res.send("index category");
+async function index(req, res, next) {
+    try {
+        const listings = await Listing.find({})
+        const allCategories = await Category.find({}).sort('title');
+        res.render('categories/index', { title: 'All Categories', categories: allCategories, listings });
+    } catch (err) {
+        console.log(err);
+        next(err);
+    }
 }
 
 async function show(req, res) {
