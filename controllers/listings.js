@@ -99,7 +99,10 @@ async function show(req, res, next) {
 
 async function edit(req, res, next) {
     const id = req.params.id;
-    const results = await Listing.findById(id)
+    const results = await Listing.findById(id).populate('category');
+
+    const allCategories = await Category.find({ _id : { $nin: listings.category }}).sort('title');
+    
     res.render('listings/edit', { title: `Edit Listing`, listing: results, id, errorMsg: '' })
 }
 
