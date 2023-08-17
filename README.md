@@ -26,9 +26,14 @@ An Express.js web application that allows users to login, post listings for sale
 - JavaScript
 - HTML
 - CSS
-- MognoDB & Mongoose
+- MognoDB
+- Mongoose
 - Express.js
 - Node.js
+- EJS
+- Dotenv
+- Method Override
+- Passport
 
 # Getting Started
 
