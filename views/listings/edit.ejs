@@ -28,17 +28,8 @@
                 <%= c.title %>
               </option>
             <%})%>
-            <!-- <option value="Electronics" <%#= listing.category === 'Electronics' ? 'selected' : '' %>>Electronics</option>
-            <option value="Bikes" <%#= listing.category === 'Bikes' ? 'selected' : '' %>>Bikes</option>
-            <option value="Pets" <%#= listing.category === 'Pets' ? 'selected' : '' %>>Pets</option>
-            <option value="Clothing" <%#= listing.category === 'Clothing' ? 'selected' : '' %>>Clothing</option> -->
           </select>
         </label><br>
-
-        <!-- <label>Image:
-            <input type="file" id="image" name="image" value=""/>
-        </label> -->
-
         <label class="edit-sold">Sold?
           <input class="sold-check" type="checkbox" name="sold" <% if (listing.sold){ %> checked<% } %>>
         </label>

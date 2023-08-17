@@ -1,15 +1,14 @@
 const Category = require('../models/categories');
 const Listing = require('../models/listings');
-// const ObjectId = require('mongodb').ObjectId;
 
 module.exports = {
     index,
     create,
-    show,
     new: newCategory,
     addToCategory
 };
 
+// Function that renders index page, passing through all listings and categories
 async function index(req, res, next) {
     try {
         const listings = await Listing.find({})
@@ -21,16 +20,14 @@ async function index(req, res, next) {
     }
 }
 
-async function show(req, res) {
-    res.send("show category");
-}
-
+// Function that creates a category and redirects back to categories
 async function create(req,res,next){
     const categoryData = {...req.body}
     await Category.create(categoryData);
-    res.redirect('/categories/new');
+    res.redirect('/categories');
 }
 
+// Function that renders a page to make a new category
 async function newCategory(req, res) {
     res.render("categories/new", {
         categories: await Category.find({}),
@@ -39,6 +36,7 @@ async function newCategory(req, res) {
     });
 }
 
+// Function that adds categories to listings
 async function addToCategory(req, res){
     const listingId = req.params.id
     const categoryId = req.body.categoryId
@@ -49,7 +47,6 @@ async function addToCategory(req, res){
         }).then(async function(result){
             await result.save()
         })
-        console.log("saving",saving)
         res.redirect(`/listings/${foundListing._id}`)
     } catch (err) {
         console.log(err)

@@ -3,7 +3,6 @@ var router = express.Router();
 const ensureLoggedIn = require('../config/ensureLoggedIn');
 const listingsCtrl = require('../controllers/listings')
 
-/* GET users listing. */
 router.get('/', listingsCtrl.index)
 
 router.get('/new', listingsCtrl.new)
