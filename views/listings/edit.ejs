@@ -3,6 +3,7 @@
     <h1>
       <%=title%>
     </h1>
+    <!-- Form to edit existing listings -->
     <form action="/listings/<%= listing._id %>?_method=PUT" method="POST">
       <div class="edit-inputs">
         <div class="edit-title-price">
@@ -20,10 +21,15 @@
           <input type="text" name="description" value="<%= listing.description %>" required>
         </label><br>
 
-        <!-- <label>Image:
-            <input type="file" id="image" name="image" value=""/>
-        </label> -->
-
+        <label>Category:
+          <select name="categoryId" required>
+            <% categories.forEach(c =>{%>
+              <option value="<%= c.id %>" <% if(listing?.category[0].equals(c.id)){ %> selected <% } %>>
+                <%= c.title %>
+              </option>
+            <%})%>
+          </select>
+        </label><br>
         <label class="edit-sold">Sold?
           <input class="sold-check" type="checkbox" name="sold" <% if (listing.sold){ %> checked<% } %>>
         </label>

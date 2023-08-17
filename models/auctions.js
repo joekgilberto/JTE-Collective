@@ -8,7 +8,9 @@ const auctionSchema = new Schema({
     listing: {
         type: Schema.Types.ObjectId,
         ref: 'Listing'
-    }
+    },
+    user: { type: Schema.Types.ObjectId },
+    username: { type: String }
 })
 
 module.exports = mongoose.model('Auction', auctionSchema)
