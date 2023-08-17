@@ -437,12 +437,16 @@ section {
   text-align: center;
 }
 
-.cats>h2{
+.cats h2{
   color: #000 !important;
 }
 
-.cats>p>a{
+.cats p a{
   color: rgb(79, 185, 133) !important;
+}
+
+.categories-cats{
+  border-bottom: 2px dashed #c0d1d7;
 }
 
 footer{
@@ -456,3 +460,4 @@ footer{
   color: #fff;
   background-image: linear-gradient(to bottom, rgb(167, 220, 226), rgb(72, 170, 122));
 }
+
