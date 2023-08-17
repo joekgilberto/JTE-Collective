@@ -3,8 +3,23 @@ An Express.js web application that allows users to login, post listings for sale
 
 # Screenshot
 
-<img src="url to your image in the assets folder">
-<img src="url to your image in the assets folder">
+### All Listings
+<img src="assets/index.png">
+
+### New Listing
+<img src="assets/new.png">
+
+### Individual Listing
+<img src="assets/show_listing.png">
+
+### Bid on Listing
+<img src="assets/show_auction.png">
+
+### Edit Listing
+<img src="assets/edit.png">
+
+### New Category
+<img src="assets/new_cat.png">
 
 # Technologies Used
 
@@ -17,9 +32,14 @@ An Express.js web application that allows users to login, post listings for sale
 
 # Getting Started
 
-[Click to Play Connect Four!](your deployment url here)
+[Click to start shopping!](https://jte-collective-a4dbe6e33fa8.herokuapp.com/)
+
+JTE Collective invites you to login with your Google credentials.  Once logged in, you can create listings to sell items, bid on other people's listings, and even create new categories of items to sell in.
+
+Owners of listings also have the functionality to edit or delete their posts, and bidders can delete their auction bids as well.
 
 # Next Steps
 
-- Future enhancement one...
-- Future enhancement two... 
+- Adding a category show page, to show all listings in a category.
+- Adding images to listings so listers can show off their wares.
+- Add an expiration to listings.
