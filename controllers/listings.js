@@ -15,6 +15,9 @@ module.exports = {
 
 async function index(req, res, next) {
     const listings = await Listing.find({})
+    listings.sort((a,b)=>{
+        return b.listingDate - a.listingDate
+    })
     res.render('index', { title: 'All Listings', listings });
 }
 
@@ -27,6 +30,10 @@ async function create(req, res, next) {
 
     //TODO: deal with absence of image
     listingData.listingDate = new Date();
+
+    listingData.user = req.user._id;
+    listingData.username = req.user.name;
+
 
     try {
         const createdListing = await Listing.create(listingData);
@@ -44,6 +51,7 @@ async function show(req, res, next) {
 
         const showListing = await Listing.findById(id)
         const auctions = await Auction.find({ listing: new ObjectId(id) })
+        const user = req.user
 
         if (auctions.length > 0) {
             auctions.forEach(a => {
@@ -57,7 +65,7 @@ async function show(req, res, next) {
             auctions[0].accepted = true
         }
 
-        res.render('listings/show', { title: showListing.title, listing: showListing, auctions })
+        res.render('listings/show', { title: showListing.title, listing: showListing, auctions, user })
     } catch (err) {
         next(err)
     }
@@ -93,7 +101,6 @@ async function update(req, res, next) {
 
 async function deleteListing(req, res, next) {
     const id = req.params.id;
-
     Listing.deleteOne({ _id: id }).then(function () {
         res.redirect(`/listings`)
     })
