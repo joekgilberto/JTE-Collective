@@ -213,6 +213,9 @@ section {
   background-image: linear-gradient(to bottom, rgb(167, 220, 226), rgb(72, 170, 122));
   margin: 0;
   color: #fff;
+  border-left: 2px solid grey;
+  border-top: 2px solid grey;
+  border-right: 2px solid grey;
 }
 
 .show-bids{
@@ -223,6 +226,8 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-left: 2px solid grey;
+  border-right: 2px solid grey;
 }
 
 .bid{
@@ -278,6 +283,9 @@ section {
   height: 20%;
   border-radius: 0 0 15px 15px;
   background-image: linear-gradient(to bottom, rgb(167, 220, 226), rgb(72, 170, 122));
+  border-left: 2px solid grey;
+  border-bottom: 2px solid grey;
+  border-right: 2px solid grey;
 }
 
 .show-offer input{
@@ -397,4 +405,16 @@ section {
   height: 40px;
   font-size: 22px;
   border-radius: 10px;
+}
+
+footer{
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-image: linear-gradient(to bottom, rgb(167, 220, 226), rgb(72, 170, 122));
 }
